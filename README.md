@@ -1,5 +1,7 @@
 # Stock Return Prediction
 
+[![CI](https://github.com/rxj0102/Stock-Return-Prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/rxj0102/Stock-Return-Prediction/actions/workflows/ci.yml)
+
 ML pipeline for predicting next-day equity returns — benchmarked on AAPL (2018–2023) with direction accuracy as the primary evaluation criterion.
 
 ---
