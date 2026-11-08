@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/rxj0102/Stock-Return-Prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/rxj0102/Stock-Return-Prediction/actions/workflows/ci.yml)
 
-ML pipeline for predicting next-day equity returns — benchmarked on AAPL (2018–2023) with direction accuracy as the primary evaluation criterion.
+ML pipeline for predicting next-day equity returns - benchmarked on AAPL (2018–2023) with direction accuracy as the primary evaluation criterion.
 
 ---
 
@@ -10,7 +10,7 @@ ML pipeline for predicting next-day equity returns — benchmarked on AAPL (2018
 
 **Research question:** Can ML models predict the *direction* of next-day log returns better than a random walk?
 
-**Why log returns?** Raw price gives R²≈0.98 via autocorrelation — that is not predictive signal. Log returns are stationary, additive, and approximately normal. Direction accuracy > 52% is the exploitability threshold.
+**Why log returns?** Raw price gives R²≈0.98 via autocorrelation - that is not predictive signal. Log returns are stationary, additive, and approximately normal. Direction accuracy > 52% is the exploitability threshold.
 
 **Pipeline:**
 
@@ -160,4 +160,4 @@ Train separate models for bull/bear/sideways regimes (identified via hidden Mark
 Incorporate lagged returns from related instruments (SPY, QQQ, sector ETFs, VIX term structure, bond yields). Single-stock models ignore systematic factor movements that often dominate next-day returns. Cross-asset signals are orthogonal to purely price-derived features and consistently improve direction accuracy in academic literature.
 
 ### 3. Probabilistic Forecasting & Kelly Sizing
-Replace point predictions with calibrated probability distributions (e.g., conformal prediction, quantile regression, or Bayesian ensembles). Use the predicted probability and variance to implement fractional Kelly position sizing rather than a binary on/off signal — this directly optimises risk-adjusted return instead of direction accuracy and is how production quant strategies are typically structured.
+Replace point predictions with calibrated probability distributions (e.g., conformal prediction, quantile regression, or Bayesian ensembles). Use the predicted probability and variance to implement fractional Kelly position sizing rather than a binary on/off signal - this directly optimises risk-adjusted return instead of direction accuracy and is how production quant strategies are typically structured.
