@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/rxj0102/Stock-Return-Prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/rxj0102/Stock-Return-Prediction/actions/workflows/ci.yml)
 
-ML pipeline for predicting next-day equity returns — benchmarked on AAPL (2018–2023) with direction accuracy as the primary evaluation criterion.
+ML pipeline for predicting next-day equity returns - benchmarked on AAPL (2018–2023) with direction accuracy as the primary evaluation criterion.
 
 ---
 
@@ -10,7 +10,7 @@ ML pipeline for predicting next-day equity returns — benchmarked on AAPL (2018
 
 **Research question:** Can ML models predict the *direction* of next-day log returns better than a random walk?
 
-**Why log returns?** Raw price gives R²≈0.98 via autocorrelation — that is not predictive signal. Log returns are stationary, additive, and approximately normal. Direction accuracy > 52% is the exploitability threshold.
+**Why log returns?** Raw price gives R²≈0.98 via autocorrelation - that is not predictive signal. Log returns are stationary, additive, and approximately normal. Direction accuracy > 52% is the exploitability threshold.
 
 **Pipeline:**
 
@@ -48,19 +48,31 @@ Raw OHLCV → Feature Engineering (80+ features) → Permutation Feature Selecti
 
 ## Key Results
 
-| Model | Direction Accuracy | Notes |
-|-------|:-----------------:|-------|
-| Weighted Ensemble (OOF) | ~53–54% | Best overall |
-| LightGBM (Tuned) | ~52–53% | Best single model |
-| Ridge | ~51–52% | Best linear model |
-| Naive (predict 0) | ~50% | Random-walk baseline |
+Numbers below are copied from the stored output of `02_stock_return_prediction.ipynb` (AAPL, test window of 500 trading days, one run; random search makes reruns differ slightly).
 
-> Results vary slightly by run due to random search stochasticity.
-> Direction accuracy above 52% is the practical bar for a tradeable signal at 0.1% round-trip cost.
+| Model | Direction accuracy | Test R2 |
+|-------|:-----------------:|:-------:|
+| RF (Tuned) | 53.2% | -0.005 |
+| Random Forest | 51.8% | -0.002 |
+| Weighted Ensemble (OOF) | 51.4% | -0.024 |
+| LightGBM (Tuned) | 51.4% | -0.006 |
+| Ridge | 50.2% | -0.209 |
 
-**Backtest (2022–2023, long-only, 0.1% round-trip cost):**
-- Strategy Sharpe > Buy & Hold Sharpe on most runs
-- Max drawdown substantially lower than buy-and-hold (selective market exposure)
+Reading this honestly:
+- No model has a positive out-of-sample R2. Every model has higher squared error than predicting zero (R2 = -0.00005 for the naive zero forecast), so there is no demonstrated forecasting skill in magnitude.
+- With 500 test days, the standard error of a direction accuracy near 50% is about 2.2 points, so 53.2% is roughly 1.5 standard errors above a coin flip, and it is the maximum over about 16 models, so it is not statistically significant.
+- The naive zero forecast shows 0.4% direction accuracy in the notebook only because sign(0) never matches a realised direction. The baseline to compare against is 50%.
+
+**Backtest (2022-2023, long-only, 0.1% round-trip cost, model chosen as best test accuracy)**
+
+| Metric | Buy and hold | Strategy |
+|--------|:-----------:|:--------:|
+| Total return | 6.99% | 7.46% |
+| Annualised Sharpe | 0.12 | 0.13 |
+| Max drawdown | 30.02% | 33.49% |
+| Trades | - | 19 |
+
+The strategy is statistically indistinguishable from buy and hold, and its drawdown is slightly worse. The model used in the backtest was selected using accuracy on the same test window, so even these figures are optimistic. Treat this repo as an example of a leakage-aware ML pipeline that finds no tradeable edge on a single liquid stock, not as a signal.
 
 ---
 
@@ -148,4 +160,4 @@ Train separate models for bull/bear/sideways regimes (identified via hidden Mark
 Incorporate lagged returns from related instruments (SPY, QQQ, sector ETFs, VIX term structure, bond yields). Single-stock models ignore systematic factor movements that often dominate next-day returns. Cross-asset signals are orthogonal to purely price-derived features and consistently improve direction accuracy in academic literature.
 
 ### 3. Probabilistic Forecasting & Kelly Sizing
-Replace point predictions with calibrated probability distributions (e.g., conformal prediction, quantile regression, or Bayesian ensembles). Use the predicted probability and variance to implement fractional Kelly position sizing rather than a binary on/off signal — this directly optimises risk-adjusted return instead of direction accuracy and is how production quant strategies are typically structured.
+Replace point predictions with calibrated probability distributions (e.g., conformal prediction, quantile regression, or Bayesian ensembles). Use the predicted probability and variance to implement fractional Kelly position sizing rather than a binary on/off signal - this directly optimises risk-adjusted return instead of direction accuracy and is how production quant strategies are typically structured.
