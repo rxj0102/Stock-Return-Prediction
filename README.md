@@ -161,3 +161,32 @@ Incorporate lagged returns from related instruments (SPY, QQQ, sector ETFs, VIX 
 
 ### 3. Probabilistic Forecasting & Kelly Sizing
 Replace point predictions with calibrated probability distributions (e.g., conformal prediction, quantile regression, or Bayesian ensembles). Use the predicted probability and variance to implement fractional Kelly position sizing rather than a binary on/off signal - this directly optimises risk-adjusted return instead of direction accuracy and is how production quant strategies are typically structured.
+
+## Reproducibility
+
+### Data availability
+
+All inputs come from free, public sources. No paid data or API keys are required unless noted.
+
+- Yahoo Finance via the yfinance package (free, no key)
+- Files shipped in the `data/` folder of this repository
+
+### Computational requirements
+
+- Python 3.12.3. Every dependency version is pinned in `uv.lock`.
+- Checked on Linux x86_64 with 2 CPU cores and 8 GB RAM. No GPU is needed.
+
+```bash
+pip install uv     # once
+uv sync            # installs the exact pinned environment
+uv run pytest -q   # runs the test suite
+```
+
+### Runtime
+
+The test suite (44 tests) finishes in about 21 seconds on the machine above, including any data downloads it triggers.
+
+### Citation
+
+Citation metadata is in `CITATION.cff`. GitHub turns it into a Cite this repository button on the repo page.
+
