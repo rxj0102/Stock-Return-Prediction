@@ -1,15 +1,11 @@
-name: ci
-
+name: tests
 on:
   push:
     branches: [main]
   pull_request:
-
 jobs:
-  test:
+  pytest:
     runs-on: ubuntu-latest
-    env:
-      MPLBACKEND: Agg
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -18,3 +14,11 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python -m pytest -q
+      - name: Rerun the study and confirm the committed results reproduce
+        run: |
+          cp results/metrics.json /tmp/committed.json
+          python scripts/reproduce.py
+          python scripts/compare_metrics.py /tmp/committed.json results/metrics.json
+        env:
+          MPLBACKEND: Agg
+      - run: python scripts/render_readme.py --check

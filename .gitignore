@@ -12,7 +12,7 @@ build/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Data cache (regenerated from yfinance on first run)
+# Scratch data
 data/*.csv
 
 # Virtual environments
