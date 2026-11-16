@@ -1,0 +1,1150 @@
+{
+  "sample": {
+    "data_first": "1926-07-01",
+    "first_forecast": "1935-10-24",
+    "last_forecast": "2026-09-29",
+    "n_forecasts": 23568,
+    "years": 93.5238,
+    "train_days": 2520,
+    "refit_days": 252,
+    "n_refits": 94,
+    "n_features": 17,
+    "cost_bps": 5.0
+  },
+  "series": {
+    "market": {
+      "label": "Market",
+      "full": {
+        "n_days": 23568,
+        "buy_hold_sharpe": 0.530572,
+        "up_days": 0.540351,
+        "autocorr_1": 0.0387774,
+        "models": {
+          "Mean": {
+            "r2_oos": 0.00064221,
+            "clark_west_t": 4.35103,
+            "direction": 0.53492,
+            "corr": -0.00307824,
+            "sharpe_gross": 0.466597,
+            "sharpe_net": 0.466345,
+            "time_invested": 0.91446,
+            "trades_per_year": 0.0748473,
+            "break_even_cost_bps": 0.0,
+            "net_minus_buy_hold": {
+              "diff": -0.064227,
+              "lo": -0.131888,
+              "hi": -0.000661206
+            }
+          },
+          "AR(1)": {
+            "r2_oos": 0.0135866,
+            "clark_west_t": 11.7611,
+            "direction": 0.551638,
+            "corr": 0.113777,
+            "sharpe_gross": 1.17675,
+            "sharpe_net": 0.811272,
+            "time_invested": 0.695265,
+            "trades_per_year": 88.9506,
+            "break_even_cost_bps": 8.83822,
+            "net_minus_buy_hold": {
+              "diff": 0.2807,
+              "lo": 0.142665,
+              "hi": 0.425818
+            }
+          },
+          "Ridge": {
+            "r2_oos": 0.00553233,
+            "clark_west_t": 10.1294,
+            "direction": 0.547437,
+            "corr": 0.0988864,
+            "sharpe_gross": 1.15368,
+            "sharpe_net": 0.693422,
+            "time_invested": 0.579812,
+            "trades_per_year": 109.651,
+            "break_even_cost_bps": 6.76823,
+            "net_minus_buy_hold": {
+              "diff": 0.16285,
+              "lo": 0.0158886,
+              "hi": 0.312624
+            },
+            "vs_ar1_t": 2.79675
+          },
+          "Boosting": {
+            "r2_oos": -0.00359873,
+            "clark_west_t": 9.13194,
+            "direction": 0.551723,
+            "corr": 0.0914092,
+            "sharpe_gross": 1.15611,
+            "sharpe_net": 0.760208,
+            "time_invested": 0.616344,
+            "trades_per_year": 95.6013,
+            "break_even_cost_bps": 7.89949,
+            "net_minus_buy_hold": {
+              "diff": 0.229636,
+              "lo": 0.0930302,
+              "hi": 0.383227
+            },
+            "vs_ar1_t": 3.61157
+          }
+        }
+      },
+      "ar1_trailing_r2_first_below_zero": "1997-10-03",
+      "ar1_trailing_r2_peak": 0.0894308,
+      "ar1_trailing_r2_peak_date": "1978-10-26",
+      "eras": {
+        "1935-1969": {
+          "n_days": 9261,
+          "buy_hold_sharpe": 0.697389,
+          "up_days": 0.557715,
+          "autocorr_1": 0.119491,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.00132535,
+              "clark_west_t": 3.98466,
+              "direction": 0.557715,
+              "corr": -0.00621839,
+              "sharpe_gross": 0.697389,
+              "sharpe_net": 0.697289,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0272109,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -9.98094e-05,
+                "lo": -0.000321445,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.0164358,
+              "clark_west_t": 10.6223,
+              "direction": 0.566677,
+              "corr": 0.121302,
+              "sharpe_gross": 1.55443,
+              "sharpe_net": 1.16005,
+              "time_invested": 0.750675,
+              "trades_per_year": 78.9388,
+              "break_even_cost_bps": 10.8547,
+              "net_minus_buy_hold": {
+                "diff": 0.462662,
+                "lo": 0.245377,
+                "hi": 0.689618
+              }
+            },
+            "Ridge": {
+              "r2_oos": 0.0192403,
+              "clark_west_t": 9.14033,
+              "direction": 0.566893,
+              "corr": 0.134583,
+              "sharpe_gross": 1.71561,
+              "sharpe_net": 1.10385,
+              "time_invested": 0.570349,
+              "trades_per_year": 115.401,
+              "break_even_cost_bps": 8.31862,
+              "net_minus_buy_hold": {
+                "diff": 0.406463,
+                "lo": 0.139511,
+                "hi": 0.688642
+              },
+              "vs_ar1_t": -0.614526
+            },
+            "Boosting": {
+              "r2_oos": 0.0182063,
+              "clark_west_t": 8.80774,
+              "direction": 0.572184,
+              "corr": 0.146849,
+              "sharpe_gross": 1.98943,
+              "sharpe_net": 1.44051,
+              "time_invested": 0.573048,
+              "trades_per_year": 102.449,
+              "break_even_cost_bps": 11.7595,
+              "net_minus_buy_hold": {
+                "diff": 0.743123,
+                "lo": 0.457898,
+                "hi": 1.04974
+              },
+              "vs_ar1_t": -0.248432
+            }
+          }
+        },
+        "1970-1999": {
+          "n_days": 7582,
+          "buy_hold_sharpe": 0.507841,
+          "up_days": 0.52374,
+          "autocorr_1": 0.162701,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.00098203,
+              "clark_west_t": 2.44732,
+              "direction": 0.515827,
+              "corr": 0.0107487,
+              "sharpe_gross": 0.424015,
+              "sharpe_net": 0.423367,
+              "time_invested": 0.80058,
+              "trades_per_year": 0.166183,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.0844734,
+                "lo": -0.255769,
+                "hi": 0.100581
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.0314158,
+              "clark_west_t": 10.0698,
+              "direction": 0.562385,
+              "corr": 0.178298,
+              "sharpe_gross": 1.92973,
+              "sharpe_net": 1.41419,
+              "time_invested": 0.60182,
+              "trades_per_year": 101.737,
+              "break_even_cost_bps": 13.7884,
+              "net_minus_buy_hold": {
+                "diff": 0.906346,
+                "lo": 0.624116,
+                "hi": 1.20388
+              }
+            },
+            "Ridge": {
+              "r2_oos": 0.0257944,
+              "clark_west_t": 9.007,
+              "direction": 0.56344,
+              "corr": 0.167217,
+              "sharpe_gross": 1.8136,
+              "sharpe_net": 1.26986,
+              "time_invested": 0.585729,
+              "trades_per_year": 111.708,
+              "break_even_cost_bps": 12.0003,
+              "net_minus_buy_hold": {
+                "diff": 0.762015,
+                "lo": 0.461205,
+                "hi": 1.04322
+              },
+              "vs_ar1_t": 1.73381
+            },
+            "Boosting": {
+              "r2_oos": 0.0254523,
+              "clark_west_t": 11.9188,
+              "direction": 0.56278,
+              "corr": 0.17101,
+              "sharpe_gross": 1.73493,
+              "sharpe_net": 1.24715,
+              "time_invested": 0.613031,
+              "trades_per_year": 101.006,
+              "break_even_cost_bps": 12.5891,
+              "net_minus_buy_hold": {
+                "diff": 0.73931,
+                "lo": 0.433468,
+                "hi": 1.02553
+              },
+              "vs_ar1_t": 1.05053
+            }
+          }
+        },
+        "2000-2012": {
+          "n_days": 3269,
+          "buy_hold_sharpe": 0.121924,
+          "up_days": 0.526767,
+          "autocorr_1": -0.0624958,
+          "models": {
+            "Mean": {
+              "r2_oos": -0.00112208,
+              "clark_west_t": -1.03885,
+              "direction": 0.505965,
+              "corr": -0.0370396,
+              "sharpe_gross": -0.134537,
+              "sharpe_net": -0.135108,
+              "time_invested": 0.845824,
+              "trades_per_year": 0.231263,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.257032,
+                "lo": -0.455191,
+                "hi": -0.0788075
+              }
+            },
+            "AR(1)": {
+              "r2_oos": -0.000894838,
+              "clark_west_t": 0.808195,
+              "direction": 0.508412,
+              "corr": 0.0156819,
+              "sharpe_gross": 0.0601024,
+              "sharpe_net": -0.134862,
+              "time_invested": 0.73937,
+              "trades_per_year": 71.2291,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.256786,
+                "lo": -0.527962,
+                "hi": 0.0381115
+              }
+            },
+            "Ridge": {
+              "r2_oos": -0.0159253,
+              "clark_west_t": -0.535736,
+              "direction": 0.49587,
+              "corr": -0.0150468,
+              "sharpe_gross": -0.0315284,
+              "sharpe_net": -0.322729,
+              "time_invested": 0.539003,
+              "trades_per_year": 101.679,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.444653,
+                "lo": -0.750179,
+                "hi": -0.143406
+              },
+              "vs_ar1_t": 2.44152
+            },
+            "Boosting": {
+              "r2_oos": -0.0399576,
+              "clark_west_t": -0.700113,
+              "direction": 0.501682,
+              "corr": -0.0198051,
+              "sharpe_gross": -0.12882,
+              "sharpe_net": -0.393262,
+              "time_invested": 0.587641,
+              "trades_per_year": 92.7366,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.515186,
+                "lo": -0.838031,
+                "hi": -0.226297
+              },
+              "vs_ar1_t": 3.79381
+            }
+          }
+        },
+        "2013-2026": {
+          "n_days": 3456,
+          "buy_hold_sharpe": 0.777478,
+          "up_days": 0.543113,
+          "autocorr_1": -0.11438,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.001722,
+              "clark_west_t": 2.43002,
+              "direction": 0.543113,
+              "corr": -0.0279469,
+              "sharpe_gross": 0.777478,
+              "sharpe_net": 0.777265,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0729167,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.000212927,
+                "lo": -0.000723818,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.00497962,
+              "clark_west_t": 2.0887,
+              "direction": 0.528646,
+              "corr": 0.0656215,
+              "sharpe_gross": 0.901266,
+              "sharpe_net": 0.542166,
+              "time_invested": 0.710069,
+              "trades_per_year": 104.49,
+              "break_even_cost_bps": 1.72354,
+              "net_minus_buy_hold": {
+                "diff": -0.235312,
+                "lo": -0.639672,
+                "hi": 0.106537
+              }
+            },
+            "Ridge": {
+              "r2_oos": -0.012774,
+              "clark_west_t": 2.22586,
+              "direction": 0.50897,
+              "corr": 0.0443729,
+              "sharpe_gross": 0.691267,
+              "sharpe_net": 0.354102,
+              "time_invested": 0.630787,
+              "trades_per_year": 97.3438,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.423376,
+                "lo": -0.787599,
+                "hi": -0.103168
+              },
+              "vs_ar1_t": 1.85551
+            },
+            "Boosting": {
+              "r2_oos": -0.0248478,
+              "clark_west_t": 0.387067,
+              "direction": 0.519965,
+              "corr": -0.00531608,
+              "sharpe_gross": 0.527838,
+              "sharpe_net": 0.305302,
+              "time_invested": 0.766782,
+              "trades_per_year": 68.0312,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.472176,
+                "lo": -0.763435,
+                "hi": -0.216169
+              },
+              "vs_ar1_t": 1.89261
+            }
+          }
+        }
+      }
+    },
+    "large": {
+      "label": "Largest tenth",
+      "full": {
+        "n_days": 23568,
+        "buy_hold_sharpe": 0.507885,
+        "up_days": 0.529956,
+        "autocorr_1": 0.00612592,
+        "models": {
+          "Mean": {
+            "r2_oos": 0.000645763,
+            "clark_west_t": 4.41953,
+            "direction": 0.526901,
+            "corr": 0.00101736,
+            "sharpe_gross": 0.456085,
+            "sharpe_net": 0.455837,
+            "time_invested": 0.893075,
+            "trades_per_year": 0.0748473,
+            "break_even_cost_bps": 0.0,
+            "net_minus_buy_hold": {
+              "diff": -0.052048,
+              "lo": -0.114658,
+              "hi": 0.0100301
+            }
+          },
+          "AR(1)": {
+            "r2_oos": 0.0083653,
+            "clark_west_t": 8.5624,
+            "direction": 0.539333,
+            "corr": 0.0893786,
+            "sharpe_gross": 0.96669,
+            "sharpe_net": 0.675373,
+            "time_invested": 0.739774,
+            "trades_per_year": 75.2001,
+            "break_even_cost_bps": 7.87242,
+            "net_minus_buy_hold": {
+              "diff": 0.167488,
+              "lo": 0.0476729,
+              "hi": 0.291704
+            }
+          },
+          "Ridge": {
+            "r2_oos": -0.000858217,
+            "clark_west_t": 8.23133,
+            "direction": 0.536914,
+            "corr": 0.0766731,
+            "sharpe_gross": 1.02164,
+            "sharpe_net": 0.580267,
+            "time_invested": 0.559318,
+            "trades_per_year": 106.55,
+            "break_even_cost_bps": 5.81983,
+            "net_minus_buy_hold": {
+              "diff": 0.0723822,
+              "lo": -0.0669127,
+              "hi": 0.210554
+            },
+            "vs_ar1_t": 3.05631
+          },
+          "Boosting": {
+            "r2_oos": -0.00843839,
+            "clark_west_t": 7.81357,
+            "direction": 0.537254,
+            "corr": 0.0752712,
+            "sharpe_gross": 0.919129,
+            "sharpe_net": 0.526714,
+            "time_invested": 0.595214,
+            "trades_per_year": 98.3814,
+            "break_even_cost_bps": 5.23984,
+            "net_minus_buy_hold": {
+              "diff": 0.0188291,
+              "lo": -0.111408,
+              "hi": 0.144257
+            },
+            "vs_ar1_t": 3.63711
+          }
+        }
+      },
+      "ar1_trailing_r2_first_below_zero": "1984-11-06",
+      "ar1_trailing_r2_peak": 0.0594939,
+      "ar1_trailing_r2_peak_date": "1975-08-22",
+      "eras": {
+        "1935-1969": {
+          "n_days": 9261,
+          "buy_hold_sharpe": 0.67838,
+          "up_days": 0.543894,
+          "autocorr_1": 0.0987784,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.00129223,
+              "clark_west_t": 3.86445,
+              "direction": 0.543894,
+              "corr": -0.00295186,
+              "sharpe_gross": 0.67838,
+              "sharpe_net": 0.678276,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0272109,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.00010369,
+                "lo": -0.000331847,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.0116775,
+              "clark_west_t": 9.09362,
+              "direction": 0.560847,
+              "corr": 0.0994519,
+              "sharpe_gross": 1.38283,
+              "sharpe_net": 1.03577,
+              "time_invested": 0.781989,
+              "trades_per_year": 70.3946,
+              "break_even_cost_bps": 10.1391,
+              "net_minus_buy_hold": {
+                "diff": 0.357392,
+                "lo": 0.154297,
+                "hi": 0.563752
+              }
+            },
+            "Ridge": {
+              "r2_oos": 0.0115425,
+              "clark_west_t": 7.73703,
+              "direction": 0.556635,
+              "corr": 0.109409,
+              "sharpe_gross": 1.58382,
+              "sharpe_net": 0.97052,
+              "time_invested": 0.568945,
+              "trades_per_year": 113.224,
+              "break_even_cost_bps": 7.37936,
+              "net_minus_buy_hold": {
+                "diff": 0.29214,
+                "lo": 0.00131397,
+                "hi": 0.556725
+              },
+              "vs_ar1_t": 0.0290594
+            },
+            "Boosting": {
+              "r2_oos": 0.019777,
+              "clark_west_t": 9.28964,
+              "direction": 0.567217,
+              "corr": 0.147825,
+              "sharpe_gross": 1.87424,
+              "sharpe_net": 1.32007,
+              "time_invested": 0.588597,
+              "trades_per_year": 101.905,
+              "break_even_cost_bps": 10.7815,
+              "net_minus_buy_hold": {
+                "diff": 0.641693,
+                "lo": 0.390575,
+                "hi": 0.910111
+              },
+              "vs_ar1_t": -1.17503
+            }
+          }
+        },
+        "1970-1999": {
+          "n_days": 7582,
+          "buy_hold_sharpe": 0.478583,
+          "up_days": 0.511475,
+          "autocorr_1": 0.0785795,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.00106114,
+              "clark_west_t": 2.88797,
+              "direction": 0.512266,
+              "corr": 0.0170815,
+              "sharpe_gross": 0.420312,
+              "sharpe_net": 0.419714,
+              "time_invested": 0.734107,
+              "trades_per_year": 0.166183,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.0588696,
+                "lo": -0.232907,
+                "hi": 0.121601
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.0108883,
+              "clark_west_t": 7.52088,
+              "direction": 0.535215,
+              "corr": 0.108861,
+              "sharpe_gross": 1.12167,
+              "sharpe_net": 0.817159,
+              "time_invested": 0.698233,
+              "trades_per_year": 75.015,
+              "break_even_cost_bps": 10.5514,
+              "net_minus_buy_hold": {
+                "diff": 0.338576,
+                "lo": 0.109181,
+                "hi": 0.552082
+              }
+            },
+            "Ridge": {
+              "r2_oos": 0.00610817,
+              "clark_west_t": 6.76588,
+              "direction": 0.540227,
+              "corr": 0.103719,
+              "sharpe_gross": 1.25274,
+              "sharpe_net": 0.789035,
+              "time_invested": 0.574782,
+              "trades_per_year": 108.318,
+              "break_even_cost_bps": 8.34976,
+              "net_minus_buy_hold": {
+                "diff": 0.310451,
+                "lo": 0.0453663,
+                "hi": 0.566278
+              },
+              "vs_ar1_t": 1.31694
+            },
+            "Boosting": {
+              "r2_oos": 0.00166148,
+              "clark_west_t": 7.68897,
+              "direction": 0.533632,
+              "corr": 0.103441,
+              "sharpe_gross": 0.967665,
+              "sharpe_net": 0.574986,
+              "time_invested": 0.597731,
+              "trades_per_year": 97.6159,
+              "break_even_cost_bps": 6.22767,
+              "net_minus_buy_hold": {
+                "diff": 0.0964024,
+                "lo": -0.123558,
+                "hi": 0.307123
+              },
+              "vs_ar1_t": 1.82263
+            }
+          }
+        },
+        "2000-2012": {
+          "n_days": 3269,
+          "buy_hold_sharpe": 0.0400177,
+          "up_days": 0.520343,
+          "autocorr_1": -0.0859894,
+          "models": {
+            "Mean": {
+              "r2_oos": -0.00154958,
+              "clark_west_t": -1.51291,
+              "direction": 0.496482,
+              "corr": -0.0361836,
+              "sharpe_gross": -0.189761,
+              "sharpe_net": -0.190339,
+              "time_invested": 0.845824,
+              "trades_per_year": 0.231263,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.230357,
+                "lo": -0.414538,
+                "hi": -0.0661905
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.00268225,
+              "clark_west_t": 1.92016,
+              "direction": 0.5026,
+              "corr": 0.0530835,
+              "sharpe_gross": 0.1925,
+              "sharpe_net": 0.0499598,
+              "time_invested": 0.780361,
+              "trades_per_year": 52.5739,
+              "break_even_cost_bps": 5.34869,
+              "net_minus_buy_hold": {
+                "diff": 0.0099421,
+                "lo": -0.261647,
+                "hi": 0.261387
+              }
+            },
+            "Ridge": {
+              "r2_oos": -0.012368,
+              "clark_west_t": 0.566695,
+              "direction": 0.502906,
+              "corr": 0.0143245,
+              "sharpe_gross": 0.129091,
+              "sharpe_net": -0.133281,
+              "time_invested": 0.47048,
+              "trades_per_year": 87.3405,
+              "break_even_cost_bps": 1.6973,
+              "net_minus_buy_hold": {
+                "diff": -0.173298,
+                "lo": -0.490063,
+                "hi": 0.159098
+              },
+              "vs_ar1_t": 2.21686
+            },
+            "Boosting": {
+              "r2_oos": -0.03785,
+              "clark_west_t": -0.17092,
+              "direction": 0.483328,
+              "corr": -0.00468255,
+              "sharpe_gross": -0.211835,
+              "sharpe_net": -0.499334,
+              "time_invested": 0.518201,
+              "trades_per_year": 99.3662,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.539352,
+                "lo": -0.860539,
+                "hi": -0.236159
+              },
+              "vs_ar1_t": 3.83451
+            }
+          }
+        },
+        "2013-2026": {
+          "n_days": 3456,
+          "buy_hold_sharpe": 0.825958,
+          "up_days": 0.542245,
+          "autocorr_1": -0.128343,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.00208916,
+              "clark_west_t": 2.72934,
+              "direction": 0.542245,
+              "corr": -0.0168608,
+              "sharpe_gross": 0.825958,
+              "sharpe_net": 0.825742,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0729167,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.000215278,
+                "lo": -0.000732662,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.00714794,
+              "clark_west_t": 2.22731,
+              "direction": 0.525463,
+              "corr": 0.0812951,
+              "sharpe_gross": 0.963893,
+              "sharpe_net": 0.58023,
+              "time_invested": 0.679398,
+              "trades_per_year": 110.031,
+              "break_even_cost_bps": 1.79728,
+              "net_minus_buy_hold": {
+                "diff": -0.245728,
+                "lo": -0.646821,
+                "hi": 0.100446
+              }
+            },
+            "Ridge": {
+              "r2_oos": -0.0148552,
+              "clark_west_t": 2.44445,
+              "direction": 0.50897,
+              "corr": 0.0518322,
+              "sharpe_gross": 0.754292,
+              "sharpe_net": 0.393036,
+              "time_invested": 0.583623,
+              "trades_per_year": 103.031,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.432922,
+                "lo": -0.771137,
+                "hi": -0.119336
+              },
+              "vs_ar1_t": 2.09995
+            },
+            "Boosting": {
+              "r2_oos": -0.0254149,
+              "clark_west_t": 0.948306,
+              "direction": 0.515914,
+              "corr": 0.0136249,
+              "sharpe_gross": 0.632124,
+              "sharpe_net": 0.331209,
+              "time_invested": 0.680266,
+              "trades_per_year": 89.7604,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.494748,
+                "lo": -0.811122,
+                "hi": -0.215928
+              },
+              "vs_ar1_t": 1.98332
+            }
+          }
+        }
+      }
+    },
+    "small": {
+      "label": "Smallest tenth",
+      "full": {
+        "n_days": 23568,
+        "buy_hold_sharpe": 0.572875,
+        "up_days": 0.549219,
+        "autocorr_1": 0.156173,
+        "models": {
+          "Mean": {
+            "r2_oos": -0.00012187,
+            "clark_west_t": 2.56929,
+            "direction": 0.539121,
+            "corr": -0.0192868,
+            "sharpe_gross": 0.542272,
+            "sharpe_net": 0.542122,
+            "time_invested": 0.967923,
+            "trades_per_year": 0.0534623,
+            "break_even_cost_bps": 0.0,
+            "net_minus_buy_hold": {
+              "diff": -0.0307525,
+              "lo": -0.0787973,
+              "hi": 0.022223
+            }
+          },
+          "AR(1)": {
+            "r2_oos": 0.0365786,
+            "clark_west_t": 9.89232,
+            "direction": 0.583758,
+            "corr": 0.189699,
+            "sharpe_gross": 1.62388,
+            "sharpe_net": 1.33588,
+            "time_invested": 0.689834,
+            "trades_per_year": 82.193,
+            "break_even_cost_bps": 18.2514,
+            "net_minus_buy_hold": {
+              "diff": 0.763008,
+              "lo": 0.592193,
+              "hi": 0.939317
+            }
+          },
+          "Ridge": {
+            "r2_oos": 0.0432469,
+            "clark_west_t": 8.38725,
+            "direction": 0.591353,
+            "corr": 0.209529,
+            "sharpe_gross": 1.99103,
+            "sharpe_net": 1.63174,
+            "time_invested": 0.570307,
+            "trades_per_year": 92.8106,
+            "break_even_cost_bps": 19.7522,
+            "net_minus_buy_hold": {
+              "diff": 1.05886,
+              "lo": 0.835829,
+              "hi": 1.29115
+            },
+            "vs_ar1_t": -1.36916
+          },
+          "Boosting": {
+            "r2_oos": 0.0348487,
+            "clark_west_t": 11.4241,
+            "direction": 0.592838,
+            "corr": 0.196934,
+            "sharpe_gross": 1.93656,
+            "sharpe_net": 1.64357,
+            "time_invested": 0.578242,
+            "trades_per_year": 78.9104,
+            "break_even_cost_bps": 23.2745,
+            "net_minus_buy_hold": {
+              "diff": 1.07069,
+              "lo": 0.868086,
+              "hi": 1.28621
+            },
+            "vs_ar1_t": 0.294595
+          }
+        }
+      },
+      "ar1_trailing_r2_first_below_zero": "2009-03-09",
+      "ar1_trailing_r2_peak": 0.235869,
+      "ar1_trailing_r2_peak_date": "1978-10-30",
+      "eras": {
+        "1935-1969": {
+          "n_days": 9261,
+          "buy_hold_sharpe": 0.783214,
+          "up_days": 0.55264,
+          "autocorr_1": 0.196834,
+          "models": {
+            "Mean": {
+              "r2_oos": 0.00105643,
+              "clark_west_t": 3.19308,
+              "direction": 0.55264,
+              "corr": -0.0303731,
+              "sharpe_gross": 0.783214,
+              "sharpe_net": 0.783148,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0272109,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -6.59973e-05,
+                "lo": -0.000237257,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.0401611,
+              "clark_west_t": 5.39643,
+              "direction": 0.574668,
+              "corr": 0.194668,
+              "sharpe_gross": 1.67768,
+              "sharpe_net": 1.40092,
+              "time_invested": 0.704999,
+              "trades_per_year": 87.7551,
+              "break_even_cost_bps": 16.1598,
+              "net_minus_buy_hold": {
+                "diff": 0.617709,
+                "lo": 0.381675,
+                "hi": 0.907262
+              }
+            },
+            "Ridge": {
+              "r2_oos": 0.0575935,
+              "clark_west_t": 4.98562,
+              "direction": 0.590865,
+              "corr": 0.236116,
+              "sharpe_gross": 2.2933,
+              "sharpe_net": 1.94583,
+              "time_invested": 0.559227,
+              "trades_per_year": 102.558,
+              "break_even_cost_bps": 21.7431,
+              "net_minus_buy_hold": {
+                "diff": 1.16262,
+                "lo": 0.814899,
+                "hi": 1.59635
+              },
+              "vs_ar1_t": -2.03721
+            },
+            "Boosting": {
+              "r2_oos": 0.0430382,
+              "clark_west_t": 6.41034,
+              "direction": 0.588057,
+              "corr": 0.207578,
+              "sharpe_gross": 2.06454,
+              "sharpe_net": 1.79023,
+              "time_invested": 0.571968,
+              "trades_per_year": 87.483,
+              "break_even_cost_bps": 23.3276,
+              "net_minus_buy_hold": {
+                "diff": 1.00701,
+                "lo": 0.704232,
+                "hi": 1.38087
+              },
+              "vs_ar1_t": -0.296481
+            }
+          }
+        },
+        "1970-1999": {
+          "n_days": 7582,
+          "buy_hold_sharpe": 0.397048,
+          "up_days": 0.554735,
+          "autocorr_1": 0.380816,
+          "models": {
+            "Mean": {
+              "r2_oos": -0.00306566,
+              "clark_west_t": -0.940455,
+              "direction": 0.523345,
+              "corr": -0.0557211,
+              "sharpe_gross": 0.23996,
+              "sharpe_net": 0.239193,
+              "time_invested": 0.90029,
+              "trades_per_year": 0.166183,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.157855,
+                "lo": -0.40724,
+                "hi": 0.0932593
+              }
+            },
+            "AR(1)": {
+              "r2_oos": 0.143349,
+              "clark_west_t": 11.5274,
+              "direction": 0.631364,
+              "corr": 0.377997,
+              "sharpe_gross": 3.89091,
+              "sharpe_net": 3.25412,
+              "time_invested": 0.59206,
+              "trades_per_year": 90.7027,
+              "break_even_cost_bps": 27.8352,
+              "net_minus_buy_hold": {
+                "diff": 2.85707,
+                "lo": 2.45382,
+                "hi": 3.24038
+              }
+            },
+            "Ridge": {
+              "r2_oos": 0.159929,
+              "clark_west_t": 14.3694,
+              "direction": 0.645476,
+              "corr": 0.399256,
+              "sharpe_gross": 4.21823,
+              "sharpe_net": 3.6369,
+              "time_invested": 0.546821,
+              "trades_per_year": 80.7317,
+              "break_even_cost_bps": 33.3961,
+              "net_minus_buy_hold": {
+                "diff": 3.23985,
+                "lo": 2.78727,
+                "hi": 3.69567
+              },
+              "vs_ar1_t": -2.62893
+            },
+            "Boosting": {
+              "r2_oos": 0.166524,
+              "clark_west_t": 17.6684,
+              "direction": 0.646267,
+              "corr": 0.407821,
+              "sharpe_gross": 4.13551,
+              "sharpe_net": 3.63729,
+              "time_invested": 0.564231,
+              "trades_per_year": 70.2954,
+              "break_even_cost_bps": 38.1637,
+              "net_minus_buy_hold": {
+                "diff": 3.24024,
+                "lo": 2.77687,
+                "hi": 3.67269
+              },
+              "vs_ar1_t": -1.86996
+            }
+          }
+        },
+        "2000-2012": {
+          "n_days": 3269,
+          "buy_hold_sharpe": 0.437965,
+          "up_days": 0.55491,
+          "autocorr_1": 0.0636814,
+          "models": {
+            "Mean": {
+              "r2_oos": -0.000728692,
+              "clark_west_t": 0.241842,
+              "direction": 0.55491,
+              "corr": -0.0707531,
+              "sharpe_gross": 0.437965,
+              "sharpe_net": 0.437766,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0770878,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.000198604,
+                "lo": -0.000688129,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": -0.007758,
+              "clark_west_t": 2.9721,
+              "direction": 0.579994,
+              "corr": 0.100874,
+              "sharpe_gross": 1.4934,
+              "sharpe_net": 1.16667,
+              "time_invested": 0.643928,
+              "trades_per_year": 94.4325,
+              "break_even_cost_bps": 16.1768,
+              "net_minus_buy_hold": {
+                "diff": 0.728708,
+                "lo": 0.20925,
+                "hi": 1.22854
+              }
+            },
+            "Ridge": {
+              "r2_oos": -0.0162388,
+              "clark_west_t": 2.90799,
+              "direction": 0.570511,
+              "corr": 0.0832356,
+              "sharpe_gross": 1.25543,
+              "sharpe_net": 0.887068,
+              "time_invested": 0.564087,
+              "trades_per_year": 96.1285,
+              "break_even_cost_bps": 11.1049,
+              "net_minus_buy_hold": {
+                "diff": 0.449104,
+                "lo": -0.0906126,
+                "hi": 0.990517
+              },
+              "vs_ar1_t": 0.981361
+            },
+            "Boosting": {
+              "r2_oos": -0.0172564,
+              "clark_west_t": 3.70901,
+              "direction": 0.567146,
+              "corr": 0.0949013,
+              "sharpe_gross": 1.26807,
+              "sharpe_net": 0.969905,
+              "time_invested": 0.560722,
+              "trades_per_year": 78.4754,
+              "break_even_cost_bps": 13.9444,
+              "net_minus_buy_hold": {
+                "diff": 0.53194,
+                "lo": 0.0171196,
+                "hi": 1.02323
+              },
+              "vs_ar1_t": 0.749098
+            }
+          }
+        },
+        "2013-2026": {
+          "n_days": 3456,
+          "buy_hold_sharpe": 0.442415,
+          "up_days": 0.522569,
+          "autocorr_1": -0.021039,
+          "models": {
+            "Mean": {
+              "r2_oos": -0.000820466,
+              "clark_west_t": -0.00909469,
+              "direction": 0.522569,
+              "corr": -0.0661066,
+              "sharpe_gross": 0.442415,
+              "sharpe_net": 0.44224,
+              "time_invested": 1.0,
+              "trades_per_year": 0.0729167,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.000174627,
+                "lo": -0.000576947,
+                "hi": 0.0
+              }
+            },
+            "AR(1)": {
+              "r2_oos": -0.00388316,
+              "clark_west_t": -1.57371,
+              "direction": 0.507234,
+              "corr": -0.0649741,
+              "sharpe_gross": 0.221462,
+              "sharpe_net": 0.128622,
+              "time_invested": 0.907118,
+              "trades_per_year": 37.2604,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.313792,
+                "lo": -0.47598,
+                "hi": -0.164185
+              }
+            },
+            "Ridge": {
+              "r2_oos": -0.0192899,
+              "clark_west_t": -0.0730369,
+              "direction": 0.493634,
+              "corr": -0.0115763,
+              "sharpe_gross": 0.216156,
+              "sharpe_net": -0.0526325,
+              "time_invested": 0.657407,
+              "trades_per_year": 90.2708,
+              "break_even_cost_bps": 0.0,
+              "net_minus_buy_hold": {
+                "diff": -0.495047,
+                "lo": -0.816071,
+                "hi": -0.230758
+              },
+              "vs_ar1_t": 2.37916
+            },
+            "Boosting": {
+              "r2_oos": -0.0275494,
+              "clark_west_t": 0.250561,
+              "direction": 0.512731,
+              "corr": -0.00250995,
+              "sharpe_gross": 0.511496,
+              "sharpe_net": 0.285853,
+              "time_invested": 0.642361,
+              "trades_per_year": 75.3958,
+              "break_even_cost_bps": 1.5313,
+              "net_minus_buy_hold": {
+                "diff": -0.156562,
+                "lo": -0.512322,
+                "hi": 0.199424
+              },
+              "vs_ar1_t": 2.86108
+            }
+          }
+        }
+      }
+    }
+  }
+}

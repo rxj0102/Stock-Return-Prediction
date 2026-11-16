@@ -1,95 +1,91 @@
-"""
-data.py
--------
-Data loading, caching, and train/test splitting utilities.
+"""Daily US equity returns from the Kenneth R. French Data Library (free, no key).
 
-All functions are pure (no side effects beyond the CSV cache) and accept
-explicit arguments so they can be used from notebooks or scripts without
-relying on global state.
-"""
+https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
 
-import os
+The study reads the frozen copy in data/snapshot. To download it again:
+
+    python -m src.data
+
+Columns of the snapshot, all daily excess returns over the one month bill rate, as decimals:
+  market   the value-weighted US market (the Mkt-RF factor)
+  large    the tenth of stocks with the largest market value, value weighted
+  small    the tenth of stocks with the smallest market value, value weighted
+"""
+from __future__ import annotations
+
+import io
+import sys
+import zipfile
+from pathlib import Path
+from urllib.request import Request, urlopen
+
 import pandas as pd
-import yfinance as yf
 
-from .config import CACHE_DIR
+ROOT = Path(__file__).resolve().parents[1]
+SNAPSHOT = ROOT / "data" / "snapshot" / "daily_excess_returns.csv.gz"
+URL = "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/{name}_CSV.zip"
+FACTORS = "F-F_Research_Data_Factors_daily"
+SIZE = "Portfolios_Formed_on_ME_Daily"
+SERIES = ["market", "large", "small"]
 
 
-def load_price_data(
-    ticker: str,
-    start: str,
-    end: str,
-    cache_dir: str = CACHE_DIR,
-) -> pd.DataFrame:
-    """Download OHLCV data from Yahoo Finance, caching to CSV to avoid rate limits.
+def parse_block(text: str, block: int = 0) -> pd.DataFrame:
+    """Return one table of a Ken French CSV as decimals indexed by date.
 
-    On the first call the data is fetched from yfinance and persisted to
-    ``<cache_dir>/<ticker>_<start_year>_<end_year>.csv``.  Subsequent calls
-    load from the cache file instead.
-
-    Parameters
-    ----------
-    ticker : str
-        Yahoo Finance ticker symbol (e.g. ``'AAPL'``).
-    start : str
-        Start date in ``'YYYY-MM-DD'`` format (inclusive).
-    end : str
-        End date in ``'YYYY-MM-DD'`` format (exclusive).
-    cache_dir : str
-        Directory in which to store the CSV cache.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with a DatetimeIndex and columns
-        ``['Open', 'High', 'Low', 'Close', 'Volume']``.
-
-    Raises
-    ------
-    AssertionError
-        If the downloaded data contains missing values.
+    A table is a header line that starts with a comma, followed by rows that start with an
+    eight digit date. Missing values are coded -99.99 or -999.
     """
-    os.makedirs(cache_dir, exist_ok=True)
-    cache_file = os.path.join(
-        cache_dir, f"{ticker}_{start[:4]}_{end[:4]}.csv"
-    )
+    tables, header, rows = [], None, []
+    for line in text.splitlines():
+        parts = [p.strip() for p in line.split(",")]
+        if len(parts) > 1 and parts[0] == "" and not rows:
+            header = parts[1:]
+        elif header is not None and len(parts[0]) == 8 and parts[0].isdigit():
+            rows.append(parts)
+        elif rows:
+            tables.append((header, rows))
+            header, rows = None, []
+    if rows:
+        tables.append((header, rows))
+    header, rows = tables[block]
+    df = pd.DataFrame([r[1:len(header) + 1] for r in rows], columns=header,
+                      index=pd.to_datetime([r[0] for r in rows], format="%Y%m%d"))
+    df = df.apply(pd.to_numeric, errors="coerce")
+    return df.mask(df <= -99.99) / 100.0
 
-    if os.path.exists(cache_file):
-        df = pd.read_csv(cache_file, index_col=0, parse_dates=True)
+
+def read_zip(raw: bytes) -> str:
+    with zipfile.ZipFile(io.BytesIO(raw)) as z:
+        return z.read(z.namelist()[0]).decode("latin-1")
+
+
+def build(factors_text: str, size_text: str) -> pd.DataFrame:
+    f = parse_block(factors_text)
+    s = parse_block(size_text)          # first table: value weighted returns
+    out = pd.DataFrame({"market": f["Mkt-RF"], "large": s["Hi 10"] - f["RF"], "small": s["Lo 10"] - f["RF"]})
+    out.index.name = "date"
+    return out.dropna()
+
+
+def download(name: str) -> bytes:
+    req = Request(URL.format(name=name), headers={"User-Agent": "curl/8.5.0"})
+    with urlopen(req, timeout=90) as r:
+        return r.read()
+
+
+def refresh(factors_zip: bytes | None = None, size_zip: bytes | None = None) -> Path:
+    df = build(read_zip(factors_zip or download(FACTORS)), read_zip(size_zip or download(SIZE)))
+    SNAPSHOT.parent.mkdir(parents=True, exist_ok=True)
+    df.round(6).to_csv(SNAPSHOT, compression={"method": "gzip", "mtime": 0})
+    return SNAPSHOT
+
+
+def load() -> pd.DataFrame:
+    return pd.read_csv(SNAPSHOT, index_col="date", parse_dates=True)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) == 3:              # two local zip files instead of a download
+        print(refresh(Path(sys.argv[1]).read_bytes(), Path(sys.argv[2]).read_bytes()))
     else:
-        df = yf.download(ticker, start=start, end=end, progress=False)
-        # yfinance ≥0.2 returns MultiIndex columns — flatten them
-        if isinstance(df.columns, pd.MultiIndex):
-            df.columns = df.columns.get_level_values(0)
-        # Normalise column order regardless of yfinance version
-        df = df[["Open", "High", "Low", "Close", "Volume"]]
-        df.to_csv(cache_file)
-
-    assert df.isnull().sum().sum() == 0, (
-        f"Missing values detected in {ticker} data — check the cache or date range."
-    )
-    return df
-
-
-def chronological_split(
-    X: pd.DataFrame,
-    y: pd.Series,
-    split_date: str,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
-    """Split features and target by calendar date (no shuffling).
-
-    Parameters
-    ----------
-    X : pd.DataFrame
-        Feature matrix with a DatetimeIndex.
-    y : pd.Series
-        Target series aligned with *X*.
-    split_date : str
-        ISO date string; rows before this date go to train, the rest to test.
-
-    Returns
-    -------
-    X_train, X_test, y_train, y_test : tuple of DataFrames / Series
-    """
-    mask = X.index < split_date
-    return X[mask], X[~mask], y[mask], y[~mask]
+        print(refresh())
