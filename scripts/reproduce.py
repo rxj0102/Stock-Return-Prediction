@@ -89,7 +89,8 @@ def main() -> None:
         series[s] = {"label": LABEL[s], "full": block(f, cfg),
                      "ar1_trailing_r2_first_below_zero": str(below[0].date()) if len(below) else None,
                      "ar1_trailing_r2_peak": float(r2.max()), "ar1_trailing_r2_peak_date": str(r2.idxmax().date()),
-                     "eras": {lab: block(f.loc[a:b], cfg) for lab, a, b in study.ERAS}}
+                     "eras": {lab: block(f.loc[a:b], cfg) for lab, a, b in study.ERAS},
+                     "tick_regimes": {lab: block(f.loc[a:b], cfg) for lab, a, b in study.TICK_REGIMES}}
         print(s, "done", flush=True)
     first = forecasts["market"]
     payload = rounded({
