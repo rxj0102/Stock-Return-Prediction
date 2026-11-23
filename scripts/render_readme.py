@@ -116,6 +116,46 @@ def results(m: dict) -> str:
     return "\n".join(out)
 
 
+NAMES = {"market": "Market", "large": "Largest tenth", "small": "Smallest tenth"}
+
+
+def ticks(m: dict) -> str:
+    regs = list(m["series"]["market"]["tick_regimes"])
+    tr = lambda s, r: m["series"][s]["tick_regimes"][r]  # noqa: E731
+    mk = lambda r: tr("market", r)  # noqa: E731
+    checks = {
+        "market autocorrelation is above 0.1 under eighths and below zero under decimals":
+            mk("Eighths")["autocorr_1"] > 0.1 and mk("Decimals")["autocorr_1"] < 0,
+        "market and large-stock AR(1) R2 is significant under eighths and not under sixteenths":
+            all(tr(s, "Eighths")["models"]["AR(1)"]["clark_west_t"] > 3
+                and tr(s, "Sixteenths")["models"]["AR(1)"]["clark_west_t"] < 1.65 for s in ("market", "large")),
+        "small stocks keep their predictability through sixteenths and lose most of it under decimals":
+            tr("small", "Sixteenths")["models"]["AR(1)"]["r2_oos"] > 0.05
+            and tr("small", "Decimals")["models"]["AR(1)"]["r2_oos"] < 0,
+    }
+    failed = [k for k, ok in checks.items() if not ok]
+    if failed:
+        raise SystemExit("The tick size paragraph no longer matches the results. Failed: " + "; ".join(failed))
+    out = ["| Series | " + " | ".join(f"{r} ({tr('market', r)['n_days']:,} days)" for r in regs) + " |",
+           "|---|" + "---|" * len(regs)]
+    for s in ("market", "large", "small"):
+        out.append(f"| {NAMES[s]}, autocorrelation | " + " | ".join(f"{tr(s, r)['autocorr_1']:+.2f}" for r in regs) + " |")
+        out.append(f"| {NAMES[s]}, AR(1) R2 (Clark-West t) | " + " | ".join(
+            f"{tr(s, r)['models']['AR(1)']['r2_oos']:+.2%} ({tr(s, r)['models']['AR(1)']['clark_west_t']:+.1f})"
+            for r in regs) + " |")
+    sm = lambda r: tr("small", r)["models"]["AR(1)"]["r2_oos"]  # noqa: E731
+    out += ["", f"The market's day-to-day autocorrelation was {mk('Eighths')['autocorr_1']:+.2f} under eighths, "
+            f"{mk('Sixteenths')['autocorr_1']:+.2f} under sixteenths and {mk('Decimals')['autocorr_1']:+.2f} under "
+            f"pennies. For the market and the largest stocks the momentum-like predictability is gone by the "
+            f"sixteenths, a short period ({mk('Sixteenths')['n_days']:,} days) and so a noisy one; under pennies a "
+            f"small reversal takes its place (R2 {mk('Decimals')['models']['AR(1)']['r2_oos']:.2%} on the market). The "
+            f"smallest stocks keep it through the sixteenths (R2 {sm('Sixteenths'):.0%}) and lose it with decimals "
+            f"({sm('Decimals'):+.1%}). The order matches Chordia, Roll and Subrahmanyam (2008), who find that "
+            f"short-horizon predictability fell with each cut in the minimum tick, and it matches the stale-price "
+            f"reading: the smallest stocks, whose prices update last, are the last to lose it."]
+    return "\n".join(out)
+
+
 def fill(text: str, name: str, body: str) -> str:
     start, end = MARK.format(name=name), END.format(name=name)
     a, b = text.index(start) + len(start), text.index(end)
@@ -126,7 +166,7 @@ def main() -> None:
     m = json.loads((ROOT / "results" / "metrics.json").read_text())
     readme = ROOT / "README.md"
     text = readme.read_text()
-    new = fill(fill(text, "headline", headline(m)), "results", results(m))
+    new = fill(fill(fill(text, "headline", headline(m)), "results", results(m)), "ticks", ticks(m))
     if "--check" in sys.argv:
         if new != text:
             print("README is out of date; run python scripts/render_readme.py")

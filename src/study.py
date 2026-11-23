@@ -31,6 +31,12 @@ MEANS = (5, 20, 60, 250)
 VOLS = (5, 20, 60)
 FEATURES = ([f"ret_lag{k}" for k in LAGS] + [f"mean_{w}" for w in MEANS] + [f"vol_{w}" for w in VOLS]
             + ["abs_ret", "drawdown_250", "gap_days", "up_streak", "down_streak"])
+# Break dates fixed by regulation, not chosen from the data: the NYSE minimum tick went from
+# eighths to sixteenths on 1997-06-24 and to pennies on 2001-01-29 (Nasdaq followed on
+# 2001-04-09). Chordia, Roll and Subrahmanyam (2008) tie the fall in short-horizon
+# predictability to these cuts.
+TICK_REGIMES = [("Eighths", "1970-01-01", "1997-06-23"), ("Sixteenths", "1997-06-24", "2001-01-26"),
+                ("Decimals", "2001-01-29", "2100-12-31")]
 ERAS = [("1935-1969", "1935", "1969"), ("1970-1999", "1970", "1999"), ("2000-2012", "2000", "2012"),
         ("2013-2026", "2013", "2026")]
 
